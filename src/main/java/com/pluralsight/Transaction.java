@@ -1,13 +1,13 @@
 package com.pluralsight;
 
-public class Tranactions {
+public class Transaction {
     private String date;
     private String time;
     private String description;
     private String vendor;
     private double amount;
 
-    public void Transactions(String date, String time,
+    public Transaction(String date, String time,
                              String description,
                              String vendor,
                              double amount) {
