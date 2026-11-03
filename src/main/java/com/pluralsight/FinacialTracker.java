@@ -4,10 +4,12 @@ import com.pluralsight.Transaction;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class FinacialTracker {
     static ArrayList<Transaction> transactions =
@@ -16,9 +18,48 @@ public class FinacialTracker {
     public static void main(String[] args) {
         loadTransactions();
         displayTransactions();
+        addDeposit();
 
 
     }
+
+    public static void addDeposit() {
+
+        Scanner scanner =
+                new Scanner(System.in);
+
+        System.out.print("Description: ");
+        String description =
+                scanner.nextLine();
+
+        System.out.print("Vendor: ");
+        String vendor =
+                scanner.nextLine();
+
+        System.out.print("Amount: ");
+        double amount =
+                Double.parseDouble(
+                        scanner.nextLine());
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        String date = today.toString();
+
+        String time =
+                now.withNano(0).toString();
+
+        Transaction transaction =
+                new Transaction(
+                        date,
+                        time,
+                        description,
+                        vendor,
+                        amount);
+
+        transactions.add(transaction);
+    }
+
 
     public static void loadTransactions() {
         try {
@@ -69,43 +110,64 @@ public class FinacialTracker {
 
         }
     }
-        public static void addDeposit () {
 
-            Scanner scanner =
-                    new Scanner(System.in);
+    public static void addPayment() {
 
-            System.out.print("Description: ");
-            String description =
-                    scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Vendor: ");
-            String vendor =
-                    scanner.nextLine();
+        System.out.print("Description: ");
+        String description = scanner.nextLine();
 
-            System.out.print("Amount: ");
-            double amount =
-                    Double.parseDouble(
-                            scanner.nextLine());
+        System.out.print("Vendor: ");
+        String vendor = scanner.nextLine();
 
-            LocalDate today = LocalDate.now();
-            LocalTime now = LocalTime.now();
+        System.out.print("Amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
 
-            String date = today.toString();
+        // Make sure the amount is negative
+        amount = -Math.abs(amount);
 
-            String time =
-                    now.withNano(0).toString();
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
 
-            Transaction transaction =
-                    new Transaction(
-                            date,
-                            time,
-                            description,
-                            vendor,
-                            amount);
+        String date = today.toString();
+        String time = now.toString();
 
-            transactions.add(transaction);
+        Transaction transaction = new Transaction(
+                date,
+                time,
+                description,
+                vendor,
+                amount);
+
+        transactions.add(transaction);
+
+        saveTransaction(transaction);
+
+        System.out.println("Payment saved!");
+    }
+
+    public static void saveTransaction(
+            Transaction transaction) {
+
+        try {
+
+            FileWriter writer =
+                    new FileWriter(
+                            "transactions.csv",
+                            true);
+
+            writer.write(
+                    transaction.toString()
+                            + "\n");
+
+            writer.close();
+
+        } catch (Exception e) {
+
+            System.out.println("Error saving.");
         }
-
+    }
 
     public static void homeScreen() {
         Scanner scanner = new Scanner(System.in);
@@ -140,9 +202,10 @@ public class FinacialTracker {
                     return;
 
 
-                    scanner.nextLine();
-                }
+                scanner.nextLine();
             }
         }
+    }
+}
 
 
