@@ -1,6 +1,10 @@
 package com.pluralsight;
 
+
+import java.time.LocalDate;
 import java.util.Scanner;
+
+import static com.pluralsight.FinacialTracker.transactions;
 
 public class Reports {
     public static void reportsScreen() {
@@ -50,4 +54,120 @@ public class Reports {
             }
         }
     }
+
+    public static void searchByVendor() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Vendor: ");
+        String vendor = scanner.nextLine();
+
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            Transaction transaction = transactions.get(i);
+
+            if (transaction.getVendor()
+                    .equalsIgnoreCase(vendor)) {
+
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public static void yearToDate() {
+
+        int currentYear =
+                LocalDate.now().getYear();
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            Transaction transaction =
+                    transactions.get(i);
+
+            LocalDate transactionDate =
+                    LocalDate.parse(
+                            transaction.getDate());
+
+            if (transactionDate.getYear()
+                    == currentYear) {
+
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public static void previousYear() {
+
+        int previousYear =
+                LocalDate.now().getYear() - 1;
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            Transaction transaction =
+                    transactions.get(i);
+
+            LocalDate transactionDate =
+                    LocalDate.parse(
+                            transaction.getDate());
+
+            if (transactionDate.getYear()
+                    == previousYear) {
+
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public static void monthToDate() {
+
+        LocalDate today =
+                LocalDate.now();
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            Transaction transaction =
+                    transactions.get(i);
+
+            LocalDate transactionDate =
+                    LocalDate.parse(
+                            transaction.getDate());
+
+            if (transactionDate.getYear()
+                    == today.getYear()
+                    &&
+                    transactionDate.getMonth()
+                            == today.getMonth()) {
+
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public static void previousMonth() {
+
+        LocalDate lastMonth =
+                LocalDate.now().minusMonths(1);
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            Transaction transaction =
+                    transactions.get(i);
+
+            LocalDate transactionDate =
+                    LocalDate.parse(
+                            transaction.getDate());
+
+            if (transactionDate.getYear()
+                    == lastMonth.getYear()
+                    &&
+                    transactionDate.getMonth()
+                            == lastMonth.getMonth()) {
+
+                System.out.println(transaction);
+            }
+        }
+    }
 }
+
+
