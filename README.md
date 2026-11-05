@@ -1,4 +1,4 @@
-# 💰 Financial Ledger Application.
+# 💰 Financial Ledger Application
 
 A Java-based financial ledger application that allows users to track deposits, payments, and account activity through an easy-to-use command-line interface. This project was built to strengthen my understanding of object-oriented programming, file handling, collections, and date/time operations in Java.
 
