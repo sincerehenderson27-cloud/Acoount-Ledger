@@ -34,7 +34,7 @@ The Financial Ledger Application provides a simple way to manage financial trans
 - Year-to-Date
 - Previous Year
 - Search by Vendor
-- Custom Search Reports
+
 
 ---
 
