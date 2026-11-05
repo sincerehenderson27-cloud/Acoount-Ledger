@@ -28,4 +28,20 @@ public class Transaction {
                 description + "|" +
                 vendor + "|" + amount;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
 }
